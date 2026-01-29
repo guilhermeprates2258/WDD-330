@@ -8,6 +8,10 @@ const productID = getParam("product");
 const product = new ProductDetails(productID, dataSource);
 product.init();
 
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter();
+
 // // add to cart button event handler
 // async function addToCartHandler(e) {
 //   const product = await dataSource.findProductById(e.target.dataset.id);
