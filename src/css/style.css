@@ -292,3 +292,22 @@ footer {
 .cart-card .remove:hover {
   background-color: #e74c3c;
 }
+
+
+.hide {
+  display: none;
+}
+
+.cart-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--primary-color);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-total {
+  font-size: var(--large-font);
+  font-weight: bold;
+  padding-right: 0.75rem;
+}
