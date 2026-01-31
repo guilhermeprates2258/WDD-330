@@ -1,55 +1,46 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { loadHeaderFooter, getLocalStorage } from "./utils.mjs";
+import ShoppingCart from "./ShoppingCart.mjs";
 
-function renderCartContents() {
+loadHeaderFooter();
+
+const cartList = document.querySelector(".product-list");
+const cart = new ShoppingCart(cartList);
+cart.init();
+
+// --- Total in Cart ---
+function updateCartTotal() {
   const cartItems = getLocalStorage("so-cart") || [];
 
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  const cartFooter = document.querySelector(".cart-footer");
+  const cartTotalEl = document.querySelector(".cart-total");
 
-  addRemoveListeners();
+  // esconde se estiver vazio
+  if (cartItems.length === 0) {
+    cartFooter.classList.add("hide");
+    return;
+  }
+
+  // mostra se tiver itens
+  cartFooter.classList.remove("hide");
+
+  // soma preços (com fallback seguro)
+  const total = cartItems.reduce((sum, item) => {
+    const price = Number(item.FinalPrice ?? item.price ?? 0);
+    const qty = Number(item.quantity ?? 1); // se não existir, assume 1
+    return sum + price * qty;
+  }, 0);
+
+  cartTotalEl.textContent = `Total: $${total.toFixed(2)}`;
 }
 
-function cartItemTemplate(item) {
-  return `
-    <li class="cart-card divider">
-      <span class="remove" data-id="${item.Id}">X</span>
+// Atualiza ao carregar
+updateCartTotal();
 
-      <a href="#" class="cart-card__image">
-        <img
-          src="${item.Image}"
-          alt="${item.Name}"
-        />
-      </a>
-
-      <a href="#">
-        <h2 class="card__name">${item.Name}</h2>
-      </a>
-
-      <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-      <p class="cart-card__quantity">qty: 1</p>
-      <p class="cart-card__price">$${item.FinalPrice}</p>
-    </li>
-  `;
-}
-
-function addRemoveListeners() {
-  const removeButtons = document.querySelectorAll(".remove");
-
-  removeButtons.forEach((button) => {
-    button.addEventListener("click", removeItemFromCart);
-  });
-}
-
-function removeItemFromCart(e) {
-  const id = e.target.dataset.id;
-
-  let cartItems = getLocalStorage("so-cart") || [];
-
-  cartItems = cartItems.filter((item) => item.Id !== id);
-
-  setLocalStorage("so-cart", cartItems);
-
-  renderCartContents();
-}
-
-renderCartContents();
+// Atualiza após remover item (delegação)
+// (o X tem a classe "remove" no seu CSS e no template padrão do carrinho)
+cartList.addEventListener("click", (e) => {
+  if (e.target.classList.contains("remove")) {
+    // espera o ShoppingCart salvar/atualizar o localStorage e re-renderizar
+    setTimeout(updateCartTotal, 0);
+  }
+});

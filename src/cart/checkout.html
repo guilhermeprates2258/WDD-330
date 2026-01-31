@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Checkout</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
+  </head>
+
+  <body>
+    <header class="divider" id="main-header"></header>
+
+    <main class="divider">
+      <section class="checkout">
+        <h2>Checkout</h2>
+
+        <form id="checkout-form">
+          <fieldset>
+            <legend>Shipping Information</legend>
+
+            <label>
+              Full Name
+              <input type="text" name="fullname" required />
+            </label>
+
+            <label>
+              Address
+              <input type="text" name="address" required />
+            </label>
+
+            <label>
+              City
+              <input type="text" name="city" required />
+            </label>
+
+            <label>
+              State
+              <input type="text" name="state" required />
+            </label>
+
+            <label>
+              ZIP Code
+              <input type="text" name="zip" required />
+            </label>
+          </fieldset>
+
+          <button type="submit">Place Order</button>
+        </form>
+      </section>
+    </main>
+
+    <footer id="main-footer"></footer>
+  </body>
+</html>
