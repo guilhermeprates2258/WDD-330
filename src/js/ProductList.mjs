@@ -1,16 +1,29 @@
-import { renderListWithTemplate } from "./utils.mjs";
-
 function productCardTemplate(product) {
+  const finalPrice = Number(product.FinalPrice);
+  const retail = Number(product.SuggestedRetailPrice);
+
+  const isDiscounted = Number.isFinite(finalPrice) && Number.isFinite(retail) && finalPrice < retail;
+
+  const discountPercent = isDiscounted
+    ? Math.round(((retail - finalPrice) / retail) * 100)
+    : 0;
+
   return `
-    <li class="product-card">
-      <a href="product_pages/?products=${product.Id}">
+    <li class="product-card ${isDiscounted ? "product-card--discount" : ""}">
+      <a href="product_pages/?product=${product.Id}">
+        ${isDiscounted ? `<span class="discount-badge">-${discountPercent}%</span>` : ""}
+
         <img src="${product.Image}" alt="${product.Name}">
         <h2>${product.Brand.Name}</h2>
         <h3>${product.NameWithoutBrand}</h3>
-        <p class="product-card__price">$${product.FinalPrice}</p>
+
+        <p class="product-card__price">
+          $${finalPrice.toFixed(2)}
+          ${isDiscounted ? `<span class="product-card__retail">$${retail.toFixed(2)}</span>` : ""}
+        </p>
       </a>
     </li>
-    `;
+  `;
 }
 
 export default class ProductList {
@@ -26,12 +39,6 @@ export default class ProductList {
   }
 
   renderList(list) {
-    // const htmlStrings = list.map(productCardTemplate);
-    // this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
-
-    // apply use new utility function instead of the commented code above
     renderListWithTemplate(productCardTemplate, this.listElement, list);
-
   }
-
 }
