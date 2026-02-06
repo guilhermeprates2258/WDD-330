@@ -311,3 +311,89 @@ footer {
   font-weight: bold;
   padding-right: 0.75rem;
 }
+
+.checkout-btn {
+  display: inline-block;
+  margin: 0.75rem;
+  padding: 0.6em 1.5em;
+  background-color: var(--secondary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+.checkout-btn:hover {
+  opacity: 0.9;
+}
+
+.checkout-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.order-summary {
+  border: 1px solid var(--light-grey);
+  padding: 1rem;
+  max-width: 420px;
+}
+
+form label {
+  display: block;
+  margin: 0.75rem 0;
+}
+
+form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 800px) {
+  .checkout-grid {
+    grid-template-columns: 1fr 420px;
+    align-items: start;
+  }
+}
+
+.alert {
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 0.75rem 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.alert__close {
+  border: 0;
+  background: transparent;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.product-card {
+  position: relative;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  background: #c0392b;
+  color: #fff;
+}
+
+.product-card__retail {
+  margin-left: 0.5rem;
+  font-size: 0.9em;
+  color: #666;
+  text-decoration: line-through;
+}
