@@ -8,7 +8,12 @@
     "build": "vite build --emptyOutDir",
     "lint": "eslint *.js src/**/*.js",
     "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\"",
-    "test": "jest"
+    "test": "jest",
+    "fp": "vite --config vite.final.config.js",
+    "fp:build": "vite build --config vite.final.config.js",
+    "fp:preview": "vite preview --config vite.final.config.js",
+    "fp:lint": "eslint FinalProject/**/*.js"
+
   },
   "author": "Shane Thompson",
   "license": "ISC",
