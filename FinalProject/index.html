@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ArchViz Hub helps you explore and organize architectural visualization references like renders, floor plans, and concept designs." />
+  <title>ArchViz Hub | Explore Architectural References</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1 class="brand">ArchViz Hub</h1>
+        <p class="tagline">Architectural inspiration, curated fast.</p>
+      </div>
+
+      <nav class="nav">
+        <a href="./index.html" aria-current="page">Explore</a>
+        <a href="./favorites.html">Favorites</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="controls" aria-label="Search and filters">
+      <form id="searchForm" class="search" role="search">
+        <label class="sr-only" for="searchInput">Search references</label>
+        <input id="searchInput" name="q" type="search" placeholder="Search: modern facade, floor plan, kitchen render..." autocomplete="off" />
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="filters">
+        <label for="categorySelect">Category</label>
+        <select id="categorySelect" name="category">
+          <option value="exteriors">Exteriors</option>
+          <option value="interiors">Interiors</option>
+          <option value="floor-plans">Floor Plans</option>
+          <option value="kitchens">Kitchens</option>
+          <option value="bathrooms">Bathrooms</option>
+          <option value="living-rooms">Living Rooms</option>
+          <option value="bedrooms">Bedrooms</option>
+          <option value="commercial">Commercial</option>
+        </select>
+
+        <label for="sortSelect">Sort</label>
+        <select id="sortSelect" name="sort">
+          <option value="relevance">Relevance</option>
+          <option value="latest">Latest</option>
+          <option value="popular">Popular</option>
+        </select>
+
+        <button id="themeToggle" type="button" class="ghost">Toggle theme</button>
+      </div>
+    </section>
+
+    <section aria-live="polite" aria-atomic="true">
+      <p id="status" class="status"></p>
+    </section>
+
+    <section>
+      <h2 class="section-title">Results</h2>
+      <div id="grid" class="grid" aria-label="Results grid"></div>
+
+      <div class="load-more-row">
+        <button id="loadMoreBtn" type="button">Load more</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modalRoot" class="modal-root" hidden>
+    <div class="modal-backdrop" data-close="true"></div>
+
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" aria-label="Close details" data-close="true">✕</button>
+
+      <div id="modalBody" class="modal-body">
+        <!-- injected -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>© <span id="year"></span> ArchViz Hub</p>
+      <p class="muted">Powered by Unsplash & Pexels</p>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
